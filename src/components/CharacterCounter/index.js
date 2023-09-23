@@ -3,11 +3,6 @@ import {Component} from 'react'
 
 import {v4 as uuidV4} from 'uuid'
 
-const test = {
-  id: uuidV4(),
-  sentence: 'balaji Kosuri',
-}
-
 class CharacterCounter extends Component {
   state = {
     CharacterList: [],
@@ -15,15 +10,17 @@ class CharacterCounter extends Component {
   }
 
   onCLickAddBtn = () => {
-    const {inputValue, CharacterList} = this.state
+    const {inputValue} = this.state
     const listItem = {
       id: uuidV4(),
       sentence: inputValue,
     }
 
     if (inputValue !== '') {
-      CharacterList.push(listItem)
-      this.setState({inputValue: ''})
+      this.setState(prevState => ({
+        CharacterList: [...prevState.CharacterList, listItem],
+        inputValue: '',
+      }))
     }
   }
 
